@@ -253,8 +253,7 @@ function addEmployee(){
                 var managerID = '';         
                 getManagerId(answer.mgr, function(result){
                     var managerID = result;
-                    console.log(managerID);
-
+                
                         connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",      
                             [answer.fname, answer.lname,res[0].id, managerID], function (err, data) {
                                 if (err) throw err; 
@@ -360,8 +359,6 @@ function updateRole(){
 
                 connection.query("SELECT id FROM role WHERE title = ? ", [answer.role], function (err, result) {
                     if (err) throw err;
-
-                    console.log(result[0].id);
 
                     connection.query("UPDATE  employee SET role_id = ? WHERE id=?",[result[0].id,res[0].id], function (err) {
                         if (err) throw err;
@@ -543,7 +540,7 @@ function addRole(){
 function showData (tableName){
     connection.query("SELECT * FROM "+tableName+" ", function (err, result) {
       if (err) throw err;    
-      console.log("\n"+tableName);  
+    //   console.log("\n"+tableName);  
       console.table(result);
       start();
     }
